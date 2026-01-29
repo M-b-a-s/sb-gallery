@@ -10,17 +10,28 @@ gsap.registerPlugin(ScrollTrigger)
 const Footer = () => {
     const cardRef = useRef<HTMLDivElement>(null);
     useGSAP(() => {
-      gsap.to(cardRef.current, {
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: cardRef.current,
           toggleActions: "restart pause reverse none",
+          start: "top center",
+          pin: true,
           scrub: 2,
-          markers: true
-        },
+        }
+      })
+      tl.to(cardRef.current, {
         x: 500,
         rotation: 360,
         duration: 3,
         ease: "none"
+      })
+      .to(cardRef.current, {
+        backgroundColor: "black",
+        duration: 1
+      })
+      .to(cardRef.current, {
+        X: 0,
+        duration: 3
       })
   });
   return (
